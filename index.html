@@ -1,484 +1,601 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-<meta name="theme-color" content="#0a0a0a" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"/>
+<meta name="theme-color" content="#0a0a0a"/>
 <title>Óticas Precisão Campina do Simão — Estilo, Qualidade e Precisão</title>
-<meta name="description" content="Óticas Precisão Campina do Simão — Cuidando dos seus olhos com estilo, qualidade e precisão. Armações modernas, lentes premium e atendimento especializado." />
-<meta name="keywords" content="ótica, óculos, armações, lentes, Campina do Simão, Precisão, exame de vista" />
-<meta property="og:title" content="Óticas Precisão Campina do Simão" />
-<meta property="og:description" content="Enxergue o mundo com mais estilo e precisão." />
-<meta property="og:type" content="website" />
+<meta name="description" content="Óticas Precisão Campina do Simão — Cuidando dos seus olhos com estilo, qualidade e precisão. Armações modernas, lentes premium e atendimento especializado."/>
+<meta name="keywords" content="ótica, óculos, armações, lentes, Campina do Simão, Precisão, exame de vista"/>
+<meta property="og:title" content="Óticas Precisão Campina do Simão"/>
+<meta property="og:description" content="Enxergue o mundo com mais estilo e precisão."/>
+<meta property="og:type" content="website"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --black:#0a0a0a;
-    --black-2:#111111;
-    --black-3:#171717;
-    --gold:#d4af37;
-    --gold-2:#f5d97a;
-    --gold-deep:#a8801f;
-    --white:#f7f5f0;
-    --muted:#a8a39a;
-    --line:rgba(212,175,55,.22);
-    --radius:18px;
-    --shadow-gold:0 10px 40px -10px rgba(212,175,55,.45);
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:'Inter',sans-serif;
-    background:var(--black);
-    color:var(--white);
-    overflow-x:hidden;
-    -webkit-font-smoothing:antialiased;
-    line-height:1.6;
-  }
-  body::before{
-    content:"";position:fixed;inset:0;z-index:-2;
-    background:
-      radial-gradient(1200px 600px at 20% -10%, rgba(212,175,55,.10), transparent 60%),
-      radial-gradient(900px 500px at 100% 20%, rgba(212,175,55,.06), transparent 60%),
-      radial-gradient(700px 500px at 50% 110%, rgba(212,175,55,.08), transparent 60%),
-      var(--black);
-  }
-  body::after{
-    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
-    background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),
-                     linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);
-    background-size:40px 40px;
-    mask-image:radial-gradient(ellipse at center, #000 30%, transparent 75%);
-  }
-  .container{max-width:1100px;margin:0 auto;padding:0 22px}
-  .serif{font-family:'Cormorant Garamond',serif;letter-spacing:.5px}
-  .gold-text{
-    background:linear-gradient(135deg,#f5d97a 0%,#d4af37 40%,#a8801f 70%,#f5d97a 100%);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
+/* ─── CSS VARIABLES: DARK / LIGHT THEME ─────────────────────────────── */
+:root {
+  --gold:#d4af37;
+  --gold-2:#f5d97a;
+  --gold-deep:#a8801f;
+  --line:rgba(212,175,55,.22);
+  --radius:18px;
+  --shadow-gold:0 10px 40px -10px rgba(212,175,55,.45);
+  --transition-theme:.35s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:#0a0a0a;
+  --bg-2:#111111;
+  --bg-3:#171717;
+  --fg:#f7f5f0;
+  --muted:#a8a39a;
+  --nav-bg:rgba(10,10,10,.6);
+  --card-bg:linear-gradient(160deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
+  --card-border:rgba(255,255,255,.06);
+  --input-bg:rgba(0,0,0,.4);
+  --input-border:rgba(255,255,255,.08);
+  --footer-bg:#0a0a0a;
+  --promo-bg:linear-gradient(180deg,#141414,#0c0c0c);
+  --theme-icon:"\f185";
+}
+[data-theme="light"] {
+  --bg:#f4f1ea;
+  --bg-2:#ede9df;
+  --bg-3:#e5dfd3;
+  --fg:#1a1710;
+  --muted:#6b6460;
+  --nav-bg:rgba(244,241,234,.88);
+  --card-bg:linear-gradient(160deg,rgba(255,255,255,.9),rgba(255,255,255,.7));
+  --card-border:rgba(212,175,55,.2);
+  --input-bg:rgba(255,255,255,.8);
+  --input-border:rgba(212,175,55,.25);
+  --footer-bg:#1a1710;
+  --promo-bg:linear-gradient(180deg,#ffffff,#f8f4ec);
+  --theme-icon:"\f186";
+}
 
-  /* NAV */
-  nav{
-    position:fixed;top:0;left:0;right:0;z-index:50;
-    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-    background:rgba(10,10,10,.55);
-    border-bottom:1px solid rgba(212,175,55,.12);
-    transition:.3s;
-  }
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;max-width:1100px;margin:0 auto}
-  .nav-logo{display:flex;align-items:center;gap:10px;font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600}
-  .nav-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
-  .nav-logo-img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:1px solid var(--gold);box-shadow:0 0 12px rgba(212,175,55,.4)}
-  .nav-cta{font-size:.85rem;padding:9px 18px;border-radius:999px;border:1px solid var(--line);color:var(--gold-2);text-decoration:none;transition:.3s}
-  .nav-cta:hover{background:var(--gold);color:#000;box-shadow:var(--shadow-gold)}
+/* ─── RESET & BASE ────────────────────────────────────────────────────── */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--fg);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.6;
+  transition:background var(--transition-theme),color var(--transition-theme);
+}
 
-  /* HERO */
-  header.hero{
-    min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;
-    padding:120px 22px 80px;position:relative;
-  }
-  .hero-logo{
-    width:140px;height:140px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;margin:0 auto 28px;
-    background:radial-gradient(circle at 30% 30%, #1a1a1a, #050505);
-    border:1.5px solid var(--gold);
-    box-shadow:0 0 60px rgba(212,175,55,.35),inset 0 0 30px rgba(212,175,55,.1);
-    animation:floatY 6s ease-in-out infinite;
-    position:relative;
-  }
-  .hero-logo::before{
-    content:"";position:absolute;inset:-6px;border-radius:50%;
-    border:1px solid rgba(212,175,55,.25);
-    animation:pulseRing 3s ease-out infinite;
-  }
-  .hero-logo svg{width:84px;height:84px}
-  .hero-logo-img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
-  @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-  @keyframes pulseRing{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.25);opacity:0}}
+/* Background grain/glow (dark only) */
+[data-theme="dark"] body::before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(212,175,55,.10), transparent 60%),
+    radial-gradient(900px 500px at 100% 20%, rgba(212,175,55,.06), transparent 60%),
+    radial-gradient(700px 500px at 50% 110%, rgba(212,175,55,.08), transparent 60%),
+    var(--bg);
+}
+[data-theme="dark"] body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);
+  background-size:40px 40px;
+  mask-image:radial-gradient(ellipse at center, #000 30%, transparent 75%);
+}
+[data-theme="light"] body::before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(800px 400px at 20% -10%, rgba(212,175,55,.07), transparent 60%),
+    var(--bg);
+}
 
-  h1.brand{font-size:clamp(2.2rem,7vw,3.6rem);font-weight:700;line-height:1.05;margin-bottom:14px}
-  .tagline{font-size:clamp(1.05rem,3vw,1.3rem);color:var(--muted);max-width:600px;margin:0 auto 12px;font-style:italic;font-family:'Cormorant Garamond',serif}
-  .hero-sub{font-size:.95rem;color:var(--muted);max-width:520px;margin:0 auto 36px}
-  .hero-buttons{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:8px}
+/* ─── SCROLL INDICATOR ───────────────────────────────────────────────── */
+#scroll-indicator{
+  position:fixed;top:0;left:0;z-index:200;
+  height:3px;width:0%;
+  background:linear-gradient(90deg,var(--gold-deep),var(--gold),var(--gold-2));
+  transition:width .1s linear;
+  border-radius:0 2px 2px 0;
+  box-shadow:0 0 10px rgba(212,175,55,.5);
+}
 
-  /* Buttons */
-  .btn{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:14px 26px;border-radius:999px;font-weight:500;font-size:.95rem;
-    text-decoration:none;transition:.35s;cursor:pointer;border:none;
-    font-family:inherit;
-  }
-  .btn-primary{
-    background:linear-gradient(135deg,#f5d97a,#d4af37 50%,#a8801f);
-    color:#0a0a0a;font-weight:600;
-    box-shadow:0 8px 24px -8px rgba(212,175,55,.6),inset 0 1px 0 rgba(255,255,255,.4);
-  }
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px -8px rgba(212,175,55,.8),inset 0 1px 0 rgba(255,255,255,.5)}
-  .btn-ghost{background:rgba(255,255,255,.03);color:var(--white);border:1px solid var(--line);backdrop-filter:blur(8px)}
-  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-2);box-shadow:0 0 20px rgba(212,175,55,.2)}
+/* ─── UTILITIES ──────────────────────────────────────────────────────── */
+.container{max-width:1100px;margin:0 auto;padding:0 22px}
+.serif{font-family:'Cormorant Garamond',serif;letter-spacing:.5px}
+.gold-text{
+  background:linear-gradient(135deg,#f5d97a 0%,#d4af37 40%,#a8801f 70%,#f5d97a 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
 
-  /* Sections */
-  section{padding:90px 0;position:relative}
-  .section-head{text-align:center;margin-bottom:50px}
-  .section-eyebrow{font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;font-weight:500}
-  .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,2.8rem);font-weight:600;line-height:1.1;margin-bottom:14px}
-  .section-desc{color:var(--muted);max-width:560px;margin:0 auto;font-size:1rem}
+/* ─── NAV ────────────────────────────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  background:var(--nav-bg);
+  border-bottom:1px solid rgba(212,175,55,.12);
+  transition:.3s;
+}
+.nav-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 22px;max-width:1100px;margin:0 auto;gap:12px;
+}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;
+  color:var(--fg);text-decoration:none;
+}
+.nav-logo-img{
+  width:36px;height:36px;border-radius:50%;object-fit:cover;
+  border:1.5px solid var(--gold);box-shadow:0 0 12px rgba(212,175,55,.4);
+}
 
-  /* Action cards */
-  .actions-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
-  .action-card{
-    position:relative;padding:26px 18px;border-radius:var(--radius);
-    background:linear-gradient(160deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
-    border:1px solid rgba(255,255,255,.06);
-    text-decoration:none;color:var(--white);text-align:center;
-    transition:.4s;overflow:hidden;
-    display:flex;flex-direction:column;align-items:center;gap:10px;
-  }
-  .action-card::before{
-    content:"";position:absolute;inset:0;border-radius:var(--radius);padding:1px;
-    background:linear-gradient(135deg,transparent 40%,var(--gold) 50%,transparent 60%);
-    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-    -webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;opacity:0;transition:.4s;
-  }
-  .action-card:hover{transform:translateY(-4px);background:linear-gradient(160deg,rgba(212,175,55,.08),rgba(255,255,255,.02))}
-  .action-card:hover::before{opacity:1}
-  .action-icon{
-    width:46px;height:46px;border-radius:14px;
-    display:flex;align-items:center;justify-content:center;font-size:1.4rem;
-    background:linear-gradient(135deg,rgba(212,175,55,.18),rgba(212,175,55,.04));
-    border:1px solid rgba(212,175,55,.25);
-  }
-  .action-title{font-size:.92rem;font-weight:500;color:var(--white)}
-  .action-sub{font-size:.72rem;color:var(--muted)}
+/* Desktop nav links */
+.nav-links{
+  display:flex;align-items:center;gap:6px;list-style:none;
+}
+.nav-links a{
+  font-size:.85rem;padding:8px 14px;border-radius:999px;
+  color:var(--muted);text-decoration:none;transition:.25s;font-weight:500;
+}
+.nav-links a:hover{color:var(--gold-2);background:rgba(212,175,55,.08)}
 
-  /* Form */
-  .form-card{
-    max-width:560px;margin:0 auto;padding:36px 28px;border-radius:24px;
-    background:linear-gradient(160deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
-    border:1px solid var(--line);
-    backdrop-filter:blur(12px);
-    box-shadow:0 30px 80px -30px rgba(0,0,0,.8);
-  }
-  .field{margin-bottom:16px;text-align:left}
-  .field label{display:block;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:500}
-  .field input,.field select{
-    width:100%;padding:14px 16px;border-radius:12px;
-    background:rgba(0,0,0,.4);
-    border:1px solid rgba(255,255,255,.08);
-    color:var(--white);font-size:.95rem;font-family:inherit;
-    transition:.3s;
-  }
-  .field input:focus,.field select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,.15)}
-  .field select{-webkit-appearance:none;-moz-appearance:none;appearance:none;background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMicgaGVpZ2h0PSc4JyB2aWV3Qm94PScwIDAgMTIgOCc+PHBhdGggZmlsbD0nI2Q0YWYzNycgZD0nTTYgOEwwIDBoMTJ6Jy8+PC9zdmc+");background-repeat:no-repeat;background-position:right 16px center}
-  .form-card .btn{width:100%;justify-content:center;margin-top:6px}
+.nav-actions{display:flex;align-items:center;gap:8px}
 
-  /* Promo cards */
-  .promo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
-  .promo-card{
-    position:relative;padding:30px 24px;border-radius:20px;
-    background:linear-gradient(180deg,#141414,#0c0c0c);
-    border:1px solid rgba(255,255,255,.06);
-    overflow:hidden;transition:.4s;
-  }
-  .promo-card::after{
-    content:"";position:absolute;top:0;left:-100%;width:60%;height:100%;
-    background:linear-gradient(90deg,transparent,rgba(212,175,55,.08),transparent);
-    transition:.7s;
-  }
-  .promo-card:hover{transform:translateY(-6px);border-color:rgba(212,175,55,.4);box-shadow:0 30px 60px -20px rgba(0,0,0,.7),0 0 0 1px rgba(212,175,55,.15)}
-  .promo-card:hover::after{left:120%}
-  .promo-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--gold);margin-bottom:10px;line-height:1}
-  .promo-title{font-size:1.05rem;font-weight:600;margin-bottom:8px}
-  .promo-desc{color:var(--muted);font-size:.88rem}
+/* Theme toggle */
+.btn-theme{
+  width:38px;height:38px;border-radius:50%;border:1px solid var(--line);
+  background:transparent;color:var(--gold);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+  transition:.3s;flex-shrink:0;
+}
+.btn-theme:hover{background:rgba(212,175,55,.12);border-color:var(--gold)}
 
-  /* Map */
-  .map-wrap{
-    border-radius:24px;overflow:hidden;border:1px solid var(--line);
-    box-shadow:0 30px 80px -30px rgba(0,0,0,.8);
-    position:relative;aspect-ratio:16/9;
-  }
-  .map-wrap iframe{width:100%;height:100%;border:0;filter:grayscale(.4) contrast(1.1) brightness(.9)}
+/* CTA button */
+.nav-cta{
+  font-size:.85rem;padding:9px 18px;border-radius:999px;
+  border:1px solid var(--line);color:var(--gold-2);
+  text-decoration:none;transition:.3s;white-space:nowrap;
+}
+.nav-cta:hover{background:var(--gold);color:#000;box-shadow:var(--shadow-gold)}
 
+/* Hamburger */
+.hamburger{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:38px;height:38px;border-radius:50%;border:1px solid var(--line);
+  background:transparent;cursor:pointer;padding:9px;
+  transition:.3s;flex-shrink:0;
+}
+.hamburger span{
+  display:block;height:1.5px;background:var(--gold);
+  border-radius:2px;transition:.35s;
+}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
 
-  /* QR - mantido apenas no footer */
-  .footer-qr-container {
-    align-items: center;
-    text-align: center;
-  }
-  .footer-qr-box {
-    background: #ffffff;
-    padding: 10px;
-    border-radius: 14px;
-    border: 1px solid var(--gold);
-    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
-    display: inline-block;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .footer-qr-box:hover {
-    transform: scale(1.03);
-    box-shadow: 0 15px 35px rgba(212, 175, 55, 0.3);
-  }
-  .footer-qr-box svg {
-    display: block;
-    width: 120px;
-    height: 120px;
-  }
-  .footer-qr-text {
-    font-size: 0.78rem;
-    color: var(--muted);
-    margin-top: 6px;
-    line-height: 1.4;
-  }
-  .footer-qr-btn {
-    margin-top: 8px;
-    padding: 8px 18px;
-    font-size: 0.8rem;
-    border-radius: 20px;
-  }
+/* Mobile menu */
+.mobile-menu{
+  display:none;flex-direction:column;
+  background:var(--nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-top:1px solid var(--line);padding:16px 22px 22px;gap:6px;
+  animation:slideDown .3s ease;
+}
+.mobile-menu.open{display:flex}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.mobile-menu a{
+  color:var(--muted);text-decoration:none;padding:12px 16px;border-radius:12px;
+  font-size:.95rem;font-weight:500;transition:.25s;display:flex;align-items:center;gap:10px;
+  border:1px solid transparent;
+}
+.mobile-menu a:hover{color:var(--gold-2);background:rgba(212,175,55,.08);border-color:var(--line)}
+.mobile-menu a i{color:var(--gold);width:16px;text-align:center;font-size:.9rem}
 
-  /* FOOTER ELEGANTE */
-  footer.elegant-footer {
-    background-color: #0a0a0a;
-    color: var(--white);
-    padding: 80px 0 30px;
-    border-top: 1px solid var(--line);
-    position: relative;
-  }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr 0.9fr 1fr 1fr;
-    gap: 30px;
-    margin-bottom: 50px;
-  }
-  .footer-col {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  .footer-logo-wrap {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 6px;
-  }
-  .footer-logo-img {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid var(--gold);
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-  }
-  .footer-logo-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-  .footer-col h4 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem;
-    color: var(--gold);
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-    position: relative;
-    padding-bottom: 8px;
-  }
-  .footer-col h4::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 35px;
-    height: 1px;
-    background-color: var(--gold);
-  }
-  .footer-col p {
-    color: var(--muted);
-    font-size: 0.9rem;
-    line-height: 1.6;
-    font-weight: 400;
-  }
-  .footer-links-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .footer-links-list li a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 0.9rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .footer-links-list li a i {
-    font-size: 0.95rem;
-    color: var(--gold);
-    width: 16px;
-    text-align: center;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .footer-links-list li a:hover {
-    color: var(--gold-2);
-    transform: translateX(4px);
-  }
-  .footer-links-list li a:hover i {
-    transform: scale(1.1);
-    color: var(--gold-2);
-  }
-  .footer-social-icons {
-    display: flex;
-    gap: 12px;
-    margin-top: 8px;
-  }
-  .footer-social-icons a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    color: var(--gold);
-    font-size: 1rem;
-    text-decoration: none;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .footer-social-icons a:hover {
-    background: linear-gradient(135deg, #f5d97a, #d4af37);
-    color: #0a0a0a;
-    border-color: var(--gold);
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
-    transform: translateY(-3px);
-  }
-  .footer-bottom {
-    text-align: center;
-    padding-top: 30px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    color: var(--muted);
-    font-size: 0.85rem;
-    letter-spacing: 0.02em;
-  }
+/* ─── HERO WITH VIDEO ────────────────────────────────────────────────── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:120px 22px 80px;position:relative;overflow:hidden;
+}
+.hero-video-wrap{
+  position:absolute;inset:0;z-index:0;
+}
+.hero-video-wrap video{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.hero-video-wrap::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(10,10,10,.65) 0%,
+    rgba(10,10,10,.55) 50%,
+    rgba(10,10,10,.85) 100%
+  );
+}
+[data-theme="light"] .hero-video-wrap::after{
+  background:linear-gradient(
+    to bottom,
+    rgba(10,10,10,.72) 0%,
+    rgba(10,10,10,.62) 50%,
+    rgba(10,10,10,.88) 100%
+  );
+}
+.hero-content{position:relative;z-index:1}
+/* In light mode over video, text is always white */
+.hero-content h1,
+.hero-content p,
+.hero-content .section-eyebrow{color:#f7f5f0 !important}
+.hero-content .section-eyebrow{color:var(--gold) !important}
+.hero-content .tagline{color:rgba(247,245,240,.75) !important}
+.hero-content .hero-sub{color:rgba(247,245,240,.65) !important}
 
-  /* Reveal animation */
-  .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
-  .reveal.in{opacity:1;transform:translateY(0)}
+h1.brand{font-size:clamp(2.2rem,7vw,3.6rem);font-weight:700;line-height:1.05;margin-bottom:14px}
+.tagline{
+  font-size:clamp(1.05rem,3vw,1.3rem);color:var(--muted);
+  max-width:600px;margin:0 auto 12px;font-style:italic;
+  font-family:'Cormorant Garamond',serif;
+}
+.hero-sub{font-size:.95rem;color:var(--muted);max-width:520px;margin:0 auto 36px}
+.section-eyebrow{font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;font-weight:500}
+.hero-buttons{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:8px}
 
-  /* Floating WhatsApp */
-  .float-wa{
-    position:fixed;bottom:22px;right:22px;z-index:60;
-    width:58px;height:58px;border-radius:50%;
-    background:linear-gradient(135deg,#25d366,#128c7e);
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:0 10px 30px rgba(37,211,102,.5);
-    color:#fff;text-decoration:none;
-    animation:floatY 3s ease-in-out infinite;
-  }
-  .float-wa svg{width:28px;height:28px}
+/* Scroll hint */
+.hero-scroll-hint{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  color:rgba(247,245,240,.4);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+  z-index:1;
+}
+.hero-scroll-hint span{
+  display:block;width:1px;height:40px;
+  background:linear-gradient(to bottom,rgba(212,175,55,.6),transparent);
+  animation:scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse{0%,100%{opacity:.4;transform:scaleY(.8)}50%{opacity:1;transform:scaleY(1)}}
 
-  /* Modal Consulta */
-  .modal-overlay{
-    display:none;position:fixed;inset:0;z-index:200;
-    background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-    align-items:center;justify-content:center;padding:20px;
-  }
-  .modal-overlay.open{display:flex;animation:fadeInOverlay .25s ease}
-  @keyframes fadeInOverlay{from{opacity:0}to{opacity:1}}
-  .modal-box{
-    position:relative;max-width:420px;width:100%;border-radius:28px;
-    background:linear-gradient(160deg,#1a1a1a,#0e0e0e);
-    border:1px solid rgba(212,175,55,.3);
-    padding:32px 28px 28px;
-    box-shadow:0 40px 100px -20px rgba(0,0,0,.9),0 0 0 1px rgba(212,175,55,.1),0 0 60px -20px rgba(212,175,55,.25);
-    animation:slideUpModal .3s cubic-bezier(.34,1.56,.64,1);
-  }
-  @keyframes slideUpModal{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
-  .modal-close{
-    position:absolute;top:16px;right:18px;background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.08);color:var(--muted);font-size:1.3rem;
-    width:34px;height:34px;border-radius:50%;cursor:pointer;
-    display:flex;align-items:center;justify-content:center;transition:.2s;line-height:1;
-  }
-  .modal-close:hover{background:rgba(255,255,255,.12);color:var(--white)}
-  .modal-badge{
-    display:inline-block;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
-    color:var(--gold);background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.25);
-    padding:5px 14px;border-radius:999px;margin-bottom:20px;
-  }
-  .modal-header-info{display:flex;align-items:center;gap:16px;margin-bottom:20px}
-  .modal-avatar{
-    width:60px;height:60px;border-radius:50%;font-size:1.8rem;
-    background:radial-gradient(circle,#1e1e1e,#0a0a0a);
-    border:1.5px solid var(--gold);box-shadow:0 0 20px rgba(212,175,55,.25);
-    display:flex;align-items:center;justify-content:center;flex-shrink:0;
-  }
-  .modal-nome{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:var(--white);line-height:1.1}
-  .modal-cargo{color:var(--gold);font-size:.83rem;margin-top:3px;font-weight:500;letter-spacing:.05em}
-  .modal-divider{height:1px;background:var(--line);margin-bottom:20px}
-  .modal-detalhes{display:flex;flex-direction:column;gap:16px;margin-bottom:24px}
-  .modal-item{display:flex;align-items:flex-start;gap:14px}
-  .modal-icon-item{font-size:1.2rem;margin-top:1px;flex-shrink:0}
-  .modal-label{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:3px;font-weight:500}
-  .modal-value{font-size:.95rem;color:var(--white);font-weight:500}
-  .modal-value-sub{font-size:.82rem;color:var(--muted);margin-top:2px}
-  .modal-cta{width:100%;justify-content:center;font-size:1rem}
-  @media(max-width:480px){
-    .modal-box{padding:26px 20px 22px}
-    .modal-nome{font-size:1.25rem}
-  }
-  @media (max-width:640px){
-    section{padding:70px 0}
-    .hero-logo{width:120px;height:120px}
-    .hero-logo svg{width:70px;height:70px}
-    .form-card{padding:28px 20px}
-    .btn{padding:16px 22px;font-size:1rem;min-height:48px}
-    .nav-cta{padding:11px 18px;min-height:44px}
-    .action-card{padding:22px 14px}
-    .actions-grid{grid-template-columns:repeat(2,1fr)}
-    .footer-grid{grid-template-columns:1fr 1fr}
-    .footer-qr-container{grid-column:span 2}
-    .float-wa{bottom:18px;right:18px;width:54px;height:54px}
-  }
-  @media (max-width:380px){
-    .actions-grid{grid-template-columns:1fr}
-  }
+/* ─── BUTTONS ────────────────────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 26px;border-radius:999px;font-weight:500;font-size:.95rem;
+  text-decoration:none;transition:.35s;cursor:pointer;border:none;font-family:inherit;
+}
+.btn-primary{
+  background:linear-gradient(135deg,#f5d97a,#d4af37 50%,#a8801f);
+  color:#0a0a0a;font-weight:600;
+  box-shadow:0 8px 24px -8px rgba(212,175,55,.6),inset 0 1px 0 rgba(255,255,255,.4);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px -8px rgba(212,175,55,.8),inset 0 1px 0 rgba(255,255,255,.5)}
+.btn-ghost{
+  background:rgba(255,255,255,.03);color:#f7f5f0;
+  border:1px solid var(--line);backdrop-filter:blur(8px);
+}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold-2);box-shadow:0 0 20px rgba(212,175,55,.2)}
+
+/* ─── SECTIONS ───────────────────────────────────────────────────────── */
+section{padding:90px 0;position:relative}
+.section-head{text-align:center;margin-bottom:50px}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,5vw,2.8rem);font-weight:600;line-height:1.1;margin-bottom:14px;
+  color:var(--fg);
+}
+.section-desc{color:var(--muted);max-width:560px;margin:0 auto;font-size:1rem}
+
+/* ─── ACTION CARDS ───────────────────────────────────────────────────── */
+.actions-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.action-card{
+  position:relative;padding:26px 18px;border-radius:var(--radius);
+  background:var(--card-bg);border:1px solid var(--card-border);
+  text-decoration:none;color:var(--fg);text-align:center;
+  transition:.4s;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+.action-card::before{
+  content:"";position:absolute;inset:0;border-radius:var(--radius);padding:1px;
+  background:linear-gradient(135deg,transparent 40%,var(--gold) 50%,transparent 60%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask-composite:exclude;opacity:0;transition:.4s;
+}
+.action-card:hover{transform:translateY(-4px);background:linear-gradient(160deg,rgba(212,175,55,.08),rgba(255,255,255,.02))}
+.action-card:hover::before{opacity:1}
+.action-icon{
+  width:46px;height:46px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;
+  background:linear-gradient(135deg,rgba(212,175,55,.18),rgba(212,175,55,.04));
+  border:1px solid rgba(212,175,55,.25);
+}
+.action-icon i{color:var(--gold);font-size:1.2rem}
+.action-title{font-size:.92rem;font-weight:500;color:var(--fg)}
+.action-sub{font-size:.72rem;color:var(--muted)}
+
+/* ─── FORM ───────────────────────────────────────────────────────────── */
+.form-card{
+  max-width:560px;margin:0 auto;padding:36px 28px;border-radius:24px;
+  background:var(--card-bg);border:1px solid var(--line);
+  backdrop-filter:blur(12px);box-shadow:0 30px 80px -30px rgba(0,0,0,.4);
+}
+.field{margin-bottom:16px;text-align:left}
+.field label{
+  display:block;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:8px;font-weight:500;
+}
+.field input,.field select,.field textarea{
+  width:100%;padding:14px 16px;border-radius:12px;
+  background:var(--input-bg);border:1px solid var(--input-border);
+  color:var(--fg);font-size:.95rem;font-family:inherit;transition:.3s;
+}
+.field textarea{resize:vertical;min-height:90px}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,.15);
+}
+/* Validation states */
+.field input.error,.field select.error,.field textarea.error{
+  border-color:#e05555;box-shadow:0 0 0 3px rgba(224,85,85,.15);
+}
+.field input.valid,.field select.valid,.field textarea.valid{
+  border-color:#4caf7d;box-shadow:0 0 0 3px rgba(76,175,125,.12);
+}
+.field-error{font-size:.75rem;color:#e05555;margin-top:5px;display:none}
+.field-error.show{display:block}
+.field select{
+  -webkit-appearance:none;-moz-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMicgaGVpZ2h0PSc4JyB2aWV3Qm94PScwIDAgMTIgOCc+PHBhdGggZmlsbD0nI2Q0YWYzNycgZD0nTTYgOEwwIDBoMTJ6Jy8+PC9zdmc+");
+  background-repeat:no-repeat;background-position:right 16px center;
+}
+.form-card .btn{width:100%;justify-content:center;margin-top:6px}
+
+/* ─── PROMO CARDS ────────────────────────────────────────────────────── */
+.promo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.promo-card{
+  position:relative;padding:30px 24px;border-radius:20px;
+  background:var(--promo-bg);border:1px solid var(--card-border);
+  overflow:hidden;transition:.4s;
+}
+[data-theme="light"] .promo-card{
+  box-shadow:0 4px 20px rgba(0,0,0,.07);
+}
+.promo-card::after{
+  content:"";position:absolute;top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(212,175,55,.08),transparent);
+  transition:.7s;
+}
+.promo-card:hover{transform:translateY(-6px);border-color:rgba(212,175,55,.4);box-shadow:0 30px 60px -20px rgba(0,0,0,.3),0 0 0 1px rgba(212,175,55,.15)}
+.promo-card:hover::after{left:120%}
+.promo-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--gold);margin-bottom:10px;line-height:1}
+.promo-title{font-size:1.05rem;font-weight:600;margin-bottom:8px;color:var(--fg)}
+.promo-desc{color:var(--muted);font-size:.88rem}
+
+/* ─── MAP ────────────────────────────────────────────────────────────── */
+.map-wrap{
+  border-radius:24px;overflow:hidden;border:1px solid var(--line);
+  box-shadow:0 30px 80px -30px rgba(0,0,0,.4);
+  position:relative;aspect-ratio:16/9;
+}
+.map-wrap iframe{width:100%;height:100%;border:0;filter:grayscale(.4) contrast(1.1) brightness(.9)}
+[data-theme="light"] .map-wrap iframe{filter:grayscale(.2) contrast(1) brightness(1)}
+
+/* ─── QR & FOOTER ────────────────────────────────────────────────────── */
+.footer-qr-container{align-items:center;text-align:center}
+.footer-qr-box{
+  background:#fff;padding:10px;border-radius:14px;
+  border:1px solid var(--gold);
+  box-shadow:0 10px 30px rgba(212,175,55,.15);
+  display:inline-block;transition:all .4s cubic-bezier(.16,1,.3,1);
+}
+.footer-qr-box:hover{transform:scale(1.03);box-shadow:0 15px 35px rgba(212,175,55,.3)}
+.footer-qr-box svg{display:block;width:120px;height:120px}
+.footer-qr-text{font-size:.78rem;color:var(--muted);margin-top:6px;line-height:1.4}
+.footer-qr-btn{margin-top:8px;padding:8px 18px;font-size:.8rem;border-radius:20px}
+
+footer.elegant-footer{
+  background-color:var(--footer-bg);
+  color:#f7f5f0;
+  padding:80px 0 30px;
+  border-top:1px solid var(--line);
+  position:relative;
+}
+footer.elegant-footer .footer-muted{color:rgba(247,245,240,.55)}
+.footer-grid{
+  display:grid;
+  grid-template-columns:1.2fr .8fr .9fr 1fr 1fr;
+  gap:30px;margin-bottom:50px;
+}
+.footer-col{display:flex;flex-direction:column;gap:16px}
+.footer-logo-wrap{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.footer-logo-img{width:46px;height:46px;border-radius:50%;object-fit:cover;border:1px solid var(--gold);box-shadow:0 0 20px rgba(212,175,55,.2)}
+.footer-logo-text{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;letter-spacing:.5px;color:#f7f5f0}
+.footer-col h4{
+  font-family:'Cormorant Garamond',serif;font-size:1.25rem;
+  color:var(--gold);font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:4px;position:relative;padding-bottom:8px;
+}
+.footer-col h4::after{
+  content:'';position:absolute;left:0;bottom:0;width:35px;height:1px;background-color:var(--gold);
+}
+.footer-col p{color:rgba(247,245,240,.55);font-size:.9rem;line-height:1.6}
+.footer-links-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.footer-links-list li a{
+  color:rgba(247,245,240,.55);text-decoration:none;font-size:.9rem;
+  display:inline-flex;align-items:center;gap:10px;
+  transition:all .4s cubic-bezier(.16,1,.3,1);
+}
+.footer-links-list li a i{font-size:.95rem;color:var(--gold);width:16px;text-align:center;transition:all .4s cubic-bezier(.16,1,.3,1)}
+.footer-links-list li a:hover{color:var(--gold-2);transform:translateX(4px)}
+.footer-links-list li a:hover i{transform:scale(1.1);color:var(--gold-2)}
+.footer-social-icons{display:flex;gap:12px;margin-top:8px}
+.footer-social-icons a{
+  display:flex;align-items:center;justify-content:center;
+  width:38px;height:38px;border-radius:50%;
+  border:1px solid rgba(212,175,55,.3);color:var(--gold);
+  font-size:1rem;text-decoration:none;
+  transition:all .4s cubic-bezier(.16,1,.3,1);
+}
+.footer-social-icons a:hover{background:linear-gradient(135deg,#f5d97a,#d4af37);color:#0a0a0a;border-color:var(--gold);box-shadow:0 0 15px rgba(212,175,55,.5)}
+.footer-bottom{
+  text-align:center;padding-top:30px;
+  border-top:1px solid rgba(255,255,255,.05);
+  color:rgba(247,245,240,.4);font-size:.85rem;letter-spacing:.02em;
+}
+
+/* ─── FLOATING WHATSAPP ──────────────────────────────────────────────── */
+.float-wa{
+  position:fixed;bottom:22px;right:22px;z-index:60;
+  width:58px;height:58px;border-radius:50%;
+  background:linear-gradient(135deg,#25d366,#128c7e);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 30px rgba(37,211,102,.5);
+  color:#fff;text-decoration:none;
+  animation:floatY 3s ease-in-out infinite;
+}
+.float-wa svg{width:28px;height:28px}
+
+/* ─── MODAL ──────────────────────────────────────────────────────────── */
+.modal-overlay{
+  display:none;position:fixed;inset:0;z-index:200;
+  background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  align-items:center;justify-content:center;padding:20px;
+}
+.modal-overlay.open{display:flex;animation:fadeInOverlay .25s ease}
+@keyframes fadeInOverlay{from{opacity:0}to{opacity:1}}
+.modal-box{
+  position:relative;max-width:420px;width:100%;border-radius:28px;
+  background:linear-gradient(160deg,#1a1a1a,#0e0e0e);
+  border:1px solid rgba(212,175,55,.3);
+  padding:32px 28px 28px;
+  box-shadow:0 40px 100px -20px rgba(0,0,0,.9),0 0 0 1px rgba(212,175,55,.1),0 0 60px -20px rgba(212,175,55,.25);
+  animation:slideUpModal .3s cubic-bezier(.34,1.56,.64,1);
+  color:#f7f5f0;
+}
+@keyframes slideUpModal{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-close{
+  position:absolute;top:16px;right:18px;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);color:#a8a39a;font-size:1.3rem;
+  width:34px;height:34px;border-radius:50%;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:.2s;line-height:1;
+}
+.modal-close:hover{background:rgba(255,255,255,.12);color:#f7f5f0}
+.modal-badge{
+  display:inline-block;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.25);
+  padding:5px 14px;border-radius:999px;margin-bottom:20px;
+}
+.modal-header-info{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.modal-avatar{
+  width:60px;height:60px;border-radius:50%;font-size:1.8rem;
+  background:radial-gradient(circle,#1e1e1e,#0a0a0a);
+  border:1.5px solid var(--gold);box-shadow:0 0 20px rgba(212,175,55,.25);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.modal-nome{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:#f7f5f0;line-height:1.1}
+.modal-cargo{color:var(--gold);font-size:.83rem;margin-top:3px;font-weight:500;letter-spacing:.05em}
+.modal-divider{height:1px;background:var(--line);margin-bottom:20px}
+.modal-detalhes{display:flex;flex-direction:column;gap:16px;margin-bottom:24px}
+.modal-item{display:flex;align-items:flex-start;gap:14px}
+.modal-icon-item{font-size:1.2rem;margin-top:1px;flex-shrink:0}
+.modal-label{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:3px;font-weight:500}
+.modal-value{font-size:.95rem;color:#f7f5f0;font-weight:500}
+.modal-value-sub{font-size:.82rem;color:#a8a39a;margin-top:2px}
+.modal-cta{width:100%;justify-content:center;font-size:1rem}
+
+/* ─── REVEAL ANIMATION ───────────────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ─── KEYFRAMES ──────────────────────────────────────────────────────── */
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────────────── */
+@media(max-width:860px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+}
+@media(max-width:640px){
+  section{padding:70px 0}
+  .form-card{padding:28px 20px}
+  .btn{padding:16px 22px;font-size:1rem;min-height:48px}
+  .nav-cta{padding:11px 18px;min-height:44px}
+  .action-card{padding:22px 14px}
+  .actions-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .footer-qr-container{grid-column:span 2}
+  .float-wa{bottom:18px;right:18px;width:54px;height:54px}
+  .modal-box{padding:26px 20px 22px}
+  .modal-nome{font-size:1.25rem}
+}
+@media(max-width:380px){
+  .actions-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-qr-container{grid-column:span 1}
+}
 </style>
 </head>
 <body>
 
-<nav>
+<!-- SCROLL INDICATOR -->
+<div id="scroll-indicator"></div>
+
+<!-- NAV -->
+<nav id="main-nav">
   <div class="nav-inner">
-        <div class="nav-logo">
+    <a href="#" class="nav-logo">
       <img src="https://fabianaju.github.io/otica-reserva-do-iguacu/logo.jpeg" alt="Logo" class="nav-logo-img"/>
       <span>Precisão <span class="gold-text">Campina do Simão</span></span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#acoes"><i class="fa-solid fa-bolt" style="color:var(--gold);margin-right:4px;font-size:.8rem"></i>Início</a></li>
+      <li><a href="#agendar"><i class="fa-solid fa-calendar" style="color:var(--gold);margin-right:4px;font-size:.8rem"></i>Agendar</a></li>
+      <li><a href="#promocoes"><i class="fa-solid fa-tag" style="color:var(--gold);margin-right:4px;font-size:.8rem"></i>Promoções</a></li>
+      <li><a href="#localizacao"><i class="fa-solid fa-location-dot" style="color:var(--gold);margin-right:4px;font-size:.8rem"></i>Localização</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="btn-theme" id="theme-toggle" aria-label="Alternar tema">
+        <i class="fa-solid fa-sun" id="theme-icon"></i>
+      </button>
+      <a href="https://wa.me/554298265111" class="nav-cta">Falar agora</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <a href="https://wa.me/554298265111" class="nav-cta">Falar agora</a>
+  </div>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#acoes" onclick="closeMenu()"><i class="fa-solid fa-bolt"></i> Início</a>
+    <a href="#agendar" onclick="closeMenu()"><i class="fa-solid fa-calendar"></i> Agendar Consulta</a>
+    <a href="#promocoes" onclick="closeMenu()"><i class="fa-solid fa-tag"></i> Promoções</a>
+    <a href="#localizacao" onclick="closeMenu()"><i class="fa-solid fa-location-dot"></i> Localização</a>
+    <a href="https://wa.me/554298265111" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+    <a href="https://www.instagram.com/oticasprecisaocampina/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- HERO WITH VIDEO -->
 <header class="hero">
-  <div class="container">
-        <div class="hero-logo">
-      <img src="https://fabianaju.github.io/otica-reserva-do-iguacu/logo.jpeg" alt="Óticas Precisão Cantagalo" class="hero-logo-img"/>
-    </div>
+  <div class="hero-video-wrap">
+    <video autoplay muted loop playsinline preload="auto"
+      src="https://raw.githubusercontent.com/Fabianaju/otica-campina-do-simao/main/oticavideo.mp4"
+      poster="https://fabianaju.github.io/otica-reserva-do-iguacu/logo.jpeg">
+    </video>
+  </div>
+
+  <div class="container hero-content">
     <div class="section-eyebrow">Óticas Precisão Campina do Simão</div>
     <h1 class="brand serif">Enxergue o mundo<br/>com mais <span class="gold-text">estilo e precisão</span>.</h1>
     <p class="tagline">"Cuidando dos seus olhos com estilo, qualidade e precisão."</p>
     <p class="hero-sub">Armações modernas, lentes premium e atendimento especializado para uma experiência única.</p>
     <div class="hero-buttons">
-      <a href="https://wa.me/554298265111" class="btn btn-primary">💬 WhatsApp</a>
-      <a href="#agendar" class="btn btn-ghost">📅 Agendar Consulta</a>
-      <a href="https://www.instagram.com/oticasprecisaocampina/" class="btn btn-ghost">📸 Instagram</a>
+      <a href="https://wa.me/554298265111" class="btn btn-primary"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+      <a href="#agendar" class="btn btn-ghost" onclick="abrirConsulta(event)"><i class="fa-solid fa-calendar-check"></i> Agendar Consulta</a>
+      <a href="https://www.instagram.com/oticasprecisaocampina/" class="btn btn-ghost" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>
     </div>
+  </div>
+
+  <div class="hero-scroll-hint">
+    <span></span>
   </div>
 </header>
 
@@ -491,33 +608,33 @@
       <p class="section-desc">Conecte-se conosco da forma que preferir.</p>
     </div>
     <div class="actions-grid">
-      <a href="https://wa.me/554298265111" class="action-card reveal">
-        <div class="action-icon">💬</div>
+      <a href="https://wa.me/554298265111" class="action-card reveal" target="_blank" rel="noopener">
+        <div class="action-icon"><i class="fa-brands fa-whatsapp"></i></div>
         <div class="action-title">WhatsApp</div>
         <div class="action-sub">Atendimento direto</div>
       </a>
-      <a href="https://www.google.com/maps/place/%C3%93ticas+Precis%C3%A3o/data=!4m2!3m1!1s0x0:0x2ba1cca87dce0d3e?sa=X&ved=1t:2428&ictx=111" class="action-card reveal">
-        <div class="action-icon">📍</div>
+      <a href="https://www.google.com/maps/place/%C3%93ticas+Precis%C3%A3o/data=!4m2!3m1!1s0x0:0x2ba1cca87dce0d3e?sa=X&ved=1t:2428&ictx=111" class="action-card reveal" target="_blank" rel="noopener">
+        <div class="action-icon"><i class="fa-solid fa-location-dot"></i></div>
         <div class="action-title">Como Chegar</div>
         <div class="action-sub">Ver no mapa</div>
       </a>
-      <a href="https://www.instagram.com/oticasprecisaocampina/" class="action-card reveal">
-        <div class="action-icon">📸</div>
+      <a href="https://www.instagram.com/oticasprecisaocampina/" class="action-card reveal" target="_blank" rel="noopener">
+        <div class="action-icon"><i class="fa-brands fa-instagram"></i></div>
         <div class="action-title">Instagram</div>
         <div class="action-sub">Veja nossos modelos</div>
       </a>
-      <a href="#agendar" class="action-card reveal">
-        <div class="action-icon">📅</div>
+      <a href="#agendar" class="action-card reveal" onclick="abrirConsulta(event)">
+        <div class="action-icon"><i class="fa-solid fa-calendar-check"></i></div>
         <div class="action-title">Agendar</div>
         <div class="action-sub">Consulta especializada</div>
       </a>
       <a href="#promocoes" class="action-card reveal">
-        <div class="action-icon">🎁</div>
+        <div class="action-icon"><i class="fa-solid fa-gift"></i></div>
         <div class="action-title">Promoções</div>
         <div class="action-sub">Ofertas exclusivas</div>
       </a>
-      <a href="https://www.google.com/maps/place/%C3%93ticas+Precis%C3%A3o/data=!4m2!3m1!1s0x0:0x2ba1cca87dce0d3e?sa=X&ved=1t:2428&ictx=111" class="action-card reveal">
-        <div class="action-icon">⭐</div>
+      <a href="https://www.google.com/maps/place/%C3%93ticas+Precis%C3%A3o/data=!4m2!3m1!1s0x0:0x2ba1cca87dce0d3e?sa=X&ved=1t:2428&ictx=111" class="action-card reveal" target="_blank" rel="noopener">
+        <div class="action-icon"><i class="fa-solid fa-star"></i></div>
         <div class="action-title">Avaliações</div>
         <div class="action-sub">Veja o que dizem</div>
       </a>
@@ -533,22 +650,25 @@
       <h2 class="section-title">Solicite seu <span class="gold-text">atendimento</span></h2>
       <p class="section-desc">Preencha os dados e entraremos em contato imediatamente pelo WhatsApp.</p>
     </div>
-    <form class="form-card reveal" onsubmit="enviarWhats(event)">
+    <form class="form-card reveal" id="contact-form" novalidate onsubmit="enviarWhats(event)">
       <div class="field">
         <label for="nome">Nome</label>
-        <input id="nome" name="nome" type="text" required placeholder="Seu nome completo"/>
+        <input id="nome" name="nome" type="text" placeholder="Seu nome completo" autocomplete="name"/>
+        <div class="field-error" id="nome-error">Por favor, informe seu nome completo.</div>
       </div>
       <div class="field">
         <label for="telefone">Telefone</label>
-        <input id="telefone" name="telefone" type="tel" required placeholder="(42) 99999-9999"/>
+        <input id="telefone" name="telefone" type="tel" placeholder="(42) 99999-9999" autocomplete="tel"/>
+        <div class="field-error" id="telefone-error">Por favor, informe um telefone válido.</div>
       </div>
       <div class="field">
         <label for="cidade">Cidade</label>
-        <input id="cidade" name="cidade" type="text" required placeholder="Sua cidade"/>
+        <input id="cidade" name="cidade" type="text" placeholder="Sua cidade" autocomplete="address-level2"/>
+        <div class="field-error" id="cidade-error">Por favor, informe sua cidade.</div>
       </div>
       <div class="field">
         <label for="interesse">Interesse</label>
-        <select id="interesse" name="interesse" required>
+        <select id="interesse" name="interesse">
           <option value="">Selecione…</option>
           <option>Consulta / Exame de vista</option>
           <option>Armações modernas</option>
@@ -557,6 +677,7 @@
           <option>Promoções</option>
           <option>Outro</option>
         </select>
+        <div class="field-error" id="interesse-error">Por favor, selecione um interesse.</div>
       </div>
       <button type="submit" class="btn btn-primary">Solicitar Atendimento ✨</button>
     </form>
@@ -572,12 +693,36 @@
       <p class="section-desc">Cuidamos de cada detalhe para entregar o melhor para você.</p>
     </div>
     <div class="promo-grid">
-      <div class="promo-card reveal"><div class="promo-num">01</div><div class="promo-title">Parcelamento Facilitado</div><div class="promo-desc">Pague em condições especiais e leve o melhor para sua visão.</div></div>
-      <div class="promo-card reveal" style="cursor:pointer" onclick="abrirConsulta(event)"><div class="promo-num">02</div><div class="promo-title">Consulta Especializada</div><div class="promo-desc">Profissionais qualificados cuidando da sua saúde ocular. <span style="color:var(--gold);font-size:.8rem">Ver agenda →</span></div></div>
-      <div class="promo-card reveal"><div class="promo-num">03</div><div class="promo-title">Armações Modernas</div><div class="promo-desc">Marcas exclusivas e os designs mais atuais do mercado.</div></div>
-      <div class="promo-card reveal"><div class="promo-num">04</div><div class="promo-title">Lentes Premium</div><div class="promo-desc">Tecnologia de ponta para conforto e nitidez incomparáveis.</div></div>
-      <div class="promo-card reveal"><div class="promo-num">05</div><div class="promo-title">Promoções Exclusivas</div><div class="promo-desc">Ofertas surpreendentes ao longo do mês — fale conosco.</div></div>
-      <div class="promo-card reveal"><div class="promo-num">06</div><div class="promo-title">Atendimento VIP</div><div class="promo-desc">Experiência personalizada do início ao fim.</div></div>
+      <div class="promo-card reveal">
+        <div class="promo-num">01</div>
+        <div class="promo-title">Parcelamento Facilitado</div>
+        <div class="promo-desc">Pague em condições especiais e leve o melhor para sua visão.</div>
+      </div>
+      <div class="promo-card reveal" style="cursor:pointer" onclick="abrirConsulta(event)">
+        <div class="promo-num">02</div>
+        <div class="promo-title">Consulta Especializada</div>
+        <div class="promo-desc">Profissionais qualificados cuidando da sua saúde ocular. <span style="color:var(--gold);font-size:.8rem">Ver agenda →</span></div>
+      </div>
+      <div class="promo-card reveal">
+        <div class="promo-num">03</div>
+        <div class="promo-title">Armações Modernas</div>
+        <div class="promo-desc">Marcas exclusivas e os designs mais atuais do mercado.</div>
+      </div>
+      <div class="promo-card reveal">
+        <div class="promo-num">04</div>
+        <div class="promo-title">Lentes Premium</div>
+        <div class="promo-desc">Tecnologia de ponta para conforto e nitidez incomparáveis.</div>
+      </div>
+      <div class="promo-card reveal">
+        <div class="promo-num">05</div>
+        <div class="promo-title">Promoções Exclusivas</div>
+        <div class="promo-desc">Ofertas surpreendentes ao longo do mês — fale conosco.</div>
+      </div>
+      <div class="promo-card reveal">
+        <div class="promo-num">06</div>
+        <div class="promo-title">Atendimento VIP</div>
+        <div class="promo-desc">Experiência personalizada do início ao fim.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -595,12 +740,12 @@
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3601!2d-52.0!3d-25.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x2ba1cca87dce0d3e!2s%C3%93ticas+Precis%C3%A3o!5e0!3m2!1spt!2sbr!4v1"></iframe>
     </div>
     <div style="text-align:center;margin-top:22px">
-      <a href="https://www.google.com/maps/place/%C3%93ticas+Precis%C3%A3o/data=!4m2!3m1!1s0x0:0x2ba1cca87dce0d3e?sa=X&ved=1t:2428&ictx=111" class="btn btn-primary">📍 Abrir no Google Maps</a>
+      <a href="https://www.google.com/maps/place/%C3%93ticas+Precis%C3%A3o/data=!4m2!3m1!1s0x0:0x2ba1cca87dce0d3e?sa=X&ved=1t:2428&ictx=111" class="btn btn-primary" target="_blank" rel="noopener"><i class="fa-solid fa-location-dot"></i> Abrir no Google Maps</a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER ELEGANTE -->
+<!-- FOOTER -->
 <footer class="elegant-footer">
   <div class="container">
     <div class="footer-grid">
@@ -642,7 +787,7 @@
         <ul class="footer-links-list">
           <li><a href="https://www.google.com/maps/place/%C3%93ticas+Precis%C3%A3o/data=!4m2!3m1!1s0x0:0x2ba1cca87dce0d3e?sa=X&ved=1t:2428&ictx=111" target="_blank" rel="noopener"><i class="fa-solid fa-location-dot"></i> R. João Ferreira Neves — Centro, Campina do Simão — PR</a></li>
         </ul>
-        <p style="margin-top: 4px; font-size: 0.85rem;"><i class="fa-regular fa-clock" style="color: var(--gold); margin-right: 6px;"></i> Horários de Atendimento:<br>Seg a Sex: 08:00 às 18:00<br>Sábados: 08:30 às 12:00</p>
+        <p style="margin-top:4px;font-size:.85rem"><i class="fa-regular fa-clock" style="color:var(--gold);margin-right:6px"></i>Horários de Atendimento:<br>Seg a Sex: 08:00 às 18:00<br>Sábados: 08:30 às 12:00</p>
       </div>
 
       <div class="footer-col footer-qr-container">
@@ -705,130 +850,208 @@
   </div>
 </div>
 
+<!-- FLOATING WHATSAPP -->
 <a href="https://wa.me/554298265111" class="float-wa" target="_blank" rel="noopener" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12 0-3.2-1.2-6.2-3.5-8.3zM12 22c-1.8 0-3.6-.5-5.2-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A10 10 0 0 1 2 12C2 6.5 6.5 2 12 2s10 4.5 10 10-4.5 10-10 10zm5.5-7.5c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2c-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6 0-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1 2.9 1.2 3.1c.2.2 2 3.1 4.9 4.3 2.9 1.2 2.9.8 3.4.8.5-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3z"/></svg>
 </a>
 
 <script>
-  document.getElementById('ano').textContent = new Date().getFullYear();
+/* ─── YEAR ─────────────────────────────────────────────────────────── */
+document.getElementById('ano').textContent = new Date().getFullYear();
 
-  // Reveal on scroll
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('in'); io.unobserve(e.target);} });
-  },{threshold:.12});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+/* ─── SCROLL INDICATOR ──────────────────────────────────────────────── */
+const scrollBar = document.getElementById('scroll-indicator');
+window.addEventListener('scroll', () => {
+  const scrollTop = document.documentElement.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const pct = (scrollTop / scrollHeight) * 100;
+  scrollBar.style.width = pct + '%';
+}, {passive:true});
 
-  // Form -> WhatsApp
-  function enviarWhats(e){
-    e.preventDefault();
-    const f = e.target;
-    const nome = f.nome.value.trim();
-    const tel = f.telefone.value.trim();
-    const cidade = f.cidade.value.trim();
-    const interesse = f.interesse.value;
-    const msg = `Olá! Gostaria de solicitar atendimento na Óticas Precisão Campina do Simão.%0A%0A*Nome:* ${nome}%0A*Telefone:* ${tel}%0A*Cidade:* ${cidade}%0A*Interesse:* ${interesse}`;
-    window.open(`https://wa.me/554298265111?text=${msg}`,'_blank');
+/* ─── THEME TOGGLE ──────────────────────────────────────────────────── */
+const html = document.documentElement;
+const themeBtn = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+
+function applyTheme(theme) {
+  html.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+  themeIcon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+}
+
+// Init
+const saved = localStorage.getItem('theme') || 'dark';
+applyTheme(saved);
+
+themeBtn.addEventListener('click', () => {
+  const current = html.getAttribute('data-theme');
+  applyTheme(current === 'dark' ? 'light' : 'dark');
+});
+
+/* ─── HAMBURGER ─────────────────────────────────────────────────────── */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+
+function closeMenu() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close on outside click
+document.addEventListener('click', (e) => {
+  if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+    closeMenu();
   }
+});
 
-  // ─── QR Code gerado puramente em JavaScript / SVG ───────────────────────────
-  const SITE_URL = 'https://otica-campina-do-simao.vercel.app/';
+/* ─── REVEAL ON SCROLL ──────────────────────────────────────────────── */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, {threshold:.12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  (function buildQR(){
-    const s = document.createElement('script');
-    s.src = 'https://unpkg.com/qrcode-generator@1.4.4/qrcode.js';
-    s.onload = function(){
-      try {
-        const qr = qrcode(0, 'H');
-        qr.addData(SITE_URL);
-        qr.make();
-        const size = 220;
-        const mod = qr.getModuleCount();
-        const cell = Math.floor(size / (mod + 8));
-        const pad = Math.floor((size - cell * mod) / 2);
-        const svg = document.getElementById('qr-svg');
-        svg.setAttribute('width', size);
-        svg.setAttribute('height', size);
-        svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
-        const bg = document.createElementNS('http://www.w3.org/2000/svg','rect');
-        bg.setAttribute('width', size); bg.setAttribute('height', size); bg.setAttribute('fill','#fff');
-        svg.appendChild(bg);
-        for(let r=0;r<mod;r++){
-          for(let c=0;c<mod;c++){
-            if(qr.isDark(r,c)){
-              const rect = document.createElementNS('http://www.w3.org/2000/svg','rect');
-              rect.setAttribute('x', pad + c*cell);
-              rect.setAttribute('y', pad + r*cell);
-              rect.setAttribute('width', cell);
-              rect.setAttribute('height', cell);
-              rect.setAttribute('fill','#0a0a0a');
-              svg.appendChild(rect);
-            }
+/* ─── FORM VALIDATION ───────────────────────────────────────────────── */
+function setFieldState(id, valid, errorId) {
+  const field = document.getElementById(id);
+  const error = document.getElementById(errorId);
+  field.classList.toggle('valid', valid);
+  field.classList.toggle('error', !valid);
+  if (error) error.classList.toggle('show', !valid);
+  return valid;
+}
+
+function validateNome() {
+  const v = document.getElementById('nome').value.trim();
+  return setFieldState('nome', v.length >= 3, 'nome-error');
+}
+function validateTelefone() {
+  const v = document.getElementById('telefone').value.replace(/\D/g,'');
+  return setFieldState('telefone', v.length >= 10, 'telefone-error');
+}
+function validateCidade() {
+  const v = document.getElementById('cidade').value.trim();
+  return setFieldState('cidade', v.length >= 2, 'cidade-error');
+}
+function validateInteresse() {
+  const v = document.getElementById('interesse').value;
+  return setFieldState('interesse', v !== '', 'interesse-error');
+}
+
+// Live validation on blur
+document.getElementById('nome').addEventListener('blur', validateNome);
+document.getElementById('telefone').addEventListener('blur', validateTelefone);
+document.getElementById('cidade').addEventListener('blur', validateCidade);
+document.getElementById('interesse').addEventListener('change', validateInteresse);
+
+// Phone mask
+document.getElementById('telefone').addEventListener('input', function() {
+  let v = this.value.replace(/\D/g,'').slice(0,11);
+  if (v.length > 2) v = '(' + v.slice(0,2) + ') ' + v.slice(2);
+  if (v.length > 10) v = v.slice(0,10) + '-' + v.slice(10);
+  this.value = v;
+});
+
+function enviarWhats(e) {
+  e.preventDefault();
+  const ok = [validateNome(), validateTelefone(), validateCidade(), validateInteresse()];
+  if (!ok.every(Boolean)) return;
+  const f = e.target;
+  const nome = f.nome.value.trim();
+  const tel = f.telefone.value.trim();
+  const cidade = f.cidade.value.trim();
+  const interesse = f.interesse.value;
+  const msg = `Olá! Gostaria de solicitar atendimento na Óticas Precisão Campina do Simão.%0A%0A*Nome:* ${nome}%0A*Telefone:* ${tel}%0A*Cidade:* ${cidade}%0A*Interesse:* ${interesse}`;
+  window.open(`https://wa.me/554298265111?text=${msg}`, '_blank');
+}
+
+/* ─── QR CODE ───────────────────────────────────────────────────────── */
+const SITE_URL = 'https://otica-campina-do-simao.vercel.app/';
+
+(function buildQR(){
+  const s = document.createElement('script');
+  s.src = 'https://unpkg.com/qrcode-generator@1.4.4/qrcode.js';
+  s.onload = function(){
+    try {
+      const qr = qrcode(0,'H');
+      qr.addData(SITE_URL);
+      qr.make();
+      const size = 220;
+      const mod = qr.getModuleCount();
+      const cell = Math.floor(size / (mod + 8));
+      const pad = Math.floor((size - cell * mod) / 2);
+      const svg = document.getElementById('qr-svg');
+      svg.setAttribute('width', size);
+      svg.setAttribute('height', size);
+      svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
+      const bg = document.createElementNS('http://www.w3.org/2000/svg','rect');
+      bg.setAttribute('width', size); bg.setAttribute('height', size); bg.setAttribute('fill','#fff');
+      svg.appendChild(bg);
+      for(let r=0;r<mod;r++){
+        for(let c=0;c<mod;c++){
+          if(qr.isDark(r,c)){
+            const rect = document.createElementNS('http://www.w3.org/2000/svg','rect');
+            rect.setAttribute('x', pad + c*cell);
+            rect.setAttribute('y', pad + r*cell);
+            rect.setAttribute('width', cell);
+            rect.setAttribute('height', cell);
+            rect.setAttribute('fill','#0a0a0a');
+            svg.appendChild(rect);
           }
         }
-      } catch(err){ console.error('QR error:', err); }
-    };
-    s.onerror = function(){
-      const el = document.getElementById('qr-svg');
-      el.outerHTML = `<a href="${SITE_URL}" style="color:#d4af37;font-size:.85rem;word-break:break-all">${SITE_URL}</a>`;
-    };
-    document.head.appendChild(s);
-  })();
+      }
+    } catch(err){ console.error('QR error:', err); }
+  };
+  s.onerror = function(){
+    const el = document.getElementById('qr-svg');
+    el.outerHTML = `<a href="${SITE_URL}" style="color:#d4af37;font-size:.85rem;word-break:break-all">${SITE_URL}</a>`;
+  };
+  document.head.appendChild(s);
+})();
 
-  function getSVGDataURL(){
-    const svg = document.getElementById('qr-svg');
-    const serialized = new XMLSerializer().serializeToString(svg);
-    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(serialized);
-  }
+function svgToPNGDataURL(cb){
+  const svg = document.getElementById('qr-svg');
+  const w = 440, h = 440;
+  const serialized = new XMLSerializer().serializeToString(svg);
+  const blob = new Blob([serialized], {type:'image/svg+xml;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const img = new Image();
+  img.onload = function(){
+    const c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = '#fff'; ctx.fillRect(0,0,w,h);
+    ctx.drawImage(img, 0, 0, w, h);
+    URL.revokeObjectURL(url);
+    cb(c.toDataURL('image/png'));
+  };
+  img.onerror = function(){ URL.revokeObjectURL(url); cb(null); };
+  img.src = url;
+}
 
-  function svgToPNGDataURL(cb){
-    const svg = document.getElementById('qr-svg');
-    const w = 440, h = 440;
-    const serialized = new XMLSerializer().serializeToString(svg);
-    const blob = new Blob([serialized], {type:'image/svg+xml;charset=utf-8'});
-    const url = URL.createObjectURL(blob);
-    const img = new Image();
-    img.onload = function(){
-      const c = document.createElement('canvas');
-      c.width = w; c.height = h;
-      const ctx = c.getContext('2d');
-      ctx.fillStyle = '#fff';
-      ctx.fillRect(0,0,w,h);
-      ctx.drawImage(img, 0, 0, w, h);
-      URL.revokeObjectURL(url);
-      cb(c.toDataURL('image/png'));
-    };
-    img.onerror = function(){ URL.revokeObjectURL(url); cb(null); };
-    img.src = url;
-  }
+function baixarQR(){
+  svgToPNGDataURL(function(dataURL){
+    if(!dataURL){ alert('Não foi possível gerar o PNG. Tente novamente.'); return; }
+    const a = document.createElement('a');
+    a.href = dataURL;
+    a.download = 'qrcode-oticas-precisao-campina-do-simao.png';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  });
+}
 
-  function baixarQR(){
-    svgToPNGDataURL(function(dataURL){
-      if(!dataURL){ alert('Não foi possível gerar o PNG. Tente novamente.'); return; }
-      const a = document.createElement('a');
-      a.href = dataURL;
-      a.download = 'qrcode-oticas-precisao-campina-do-simao.png';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    });
-  }
-
-  async function compartilharQR(){
-    if(navigator.share){
-      try{
-        await navigator.share({ title:'Óticas Precisão Campina do Simão', text:'Acesse nossa página:', url: SITE_URL });
-        return;
-      } catch(err){ if(err.name==='AbortError') return; }
-    }
-    try{
-      await navigator.clipboard.writeText(SITE_URL);
-      alert('Link copiado!\n' + SITE_URL);
-    } catch {
-      prompt('Copie o link:', SITE_URL);
-    }
-  }
-  function abrirConsulta(e){ e.preventDefault(); document.getElementById('modal-consulta').classList.add('open'); document.body.style.overflow='hidden'; }
-  function fecharConsultaBtn(){ document.getElementById('modal-consulta').classList.remove('open'); document.body.style.overflow=''; }
-  function fecharConsulta(e){ if(e.target===document.getElementById('modal-consulta')) fecharConsultaBtn(); }
-  document.addEventListener('keydown',function(e){ if(e.key==='Escape') fecharConsultaBtn(); });
+/* ─── MODAL ─────────────────────────────────────────────────────────── */
+function abrirConsulta(e) { e.preventDefault(); document.getElementById('modal-consulta').classList.add('open'); document.body.style.overflow='hidden'; }
+function fecharConsultaBtn() { document.getElementById('modal-consulta').classList.remove('open'); document.body.style.overflow=''; }
+function fecharConsulta(e) { if(e.target===document.getElementById('modal-consulta')) fecharConsultaBtn(); }
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') fecharConsultaBtn(); });
 </script>
+</body>
+</html>
